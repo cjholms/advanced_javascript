@@ -53,7 +53,6 @@ function performOperation() {
             result = firstNumber * secondNumber;
             break;
         case "/":
-            // TODO: Probably want to catch divide by zero
             result = firstNumber / secondNumber;
             break;
         default:
