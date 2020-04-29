@@ -1,7 +1,7 @@
 // Put your calculator's JavaScript here.
 const input = document.querySelector("input");
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = "";
+let secondNumber = "";
 let operator = "";
 
 document.querySelectorAll("button")
@@ -9,19 +9,28 @@ document.querySelectorAll("button")
 
 
 function readButton(button) {
-    if (Number.parseInt(button.textContent) || button.textContent === "." || 
-    button.textContent === "0") {
+    if (!Number.parseInt(button.textContent) &&
+            button.textContent !== "." && 
+            button.textContent !== "0") {
+        console.log(button.textContent + " is not a number");
+        // this is not a number
+        if (button.textContent == "=") {
+            secondNumber = Number(input.value);
+            input.value = performOperation();
+        } else if (button.textContent == "c") {
+            input.value = "";
+            firstNumber = "";
+            secondNumber = "";
+        } else {
+            // this is the operator case
+            firstNumber = Number(input.value);
+            input.value = "";
+            operator = button.textContent;
+        }
+    } else {
+        // this is a number
+        console.log(button.textContent + " is a number");
         input.value += button.textContent;
-    } else if (button.textContent !== "c" && button.textContent !== "=") {
-        firstNumber = Number(input.value);
-        input.value = "";
-        operator = button.textContent;
-        console.log("Operator is " + operator);
-    } else if (button.textContent === "=") {
-        secondNumber = Number(input.value);
-        input.value = performOperation();
-    } else if (button.textContent === "c") {
-        input.value = "";
     }
 
     console.log("Clicked " + button.textContent);
@@ -29,7 +38,7 @@ function readButton(button) {
 
 function performOperation() {
     let result = 0;
-    console.log("Reading operator " + operator);
+    console.log("Using operator " + operator);
     switch(operator) {
         case "+":
             result = firstNumber + secondNumber;
@@ -41,6 +50,7 @@ function performOperation() {
             result = firstNumber * secondNumber;
             break;
         case "/":
+            // TODO: Probably want to catch divide by zero
             result = firstNumber / secondNumber;
             break;
         default:
