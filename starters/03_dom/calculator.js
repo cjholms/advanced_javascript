@@ -9,9 +9,7 @@ document.querySelectorAll("button")
 
 
 function readButton(button) {
-    if (!Number.parseInt(button.textContent) &&
-            button.textContent !== "." && 
-            button.textContent !== "0") {
+    if (!isNumber(button.textContent) && button.textContent !== ".") {
         console.log(button.textContent + " is not a number");
         // this is not a number
         if (button.textContent == "=") {
@@ -34,6 +32,11 @@ function readButton(button) {
     }
 
     console.log("Clicked " + button.textContent);
+}
+
+function isNumber(input) {
+    const numberMatch = /^\d+$/;
+    return numberMatch.test(input);
 }
 
 function performOperation() {
