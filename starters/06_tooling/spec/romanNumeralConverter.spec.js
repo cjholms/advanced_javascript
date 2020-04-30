@@ -8,4 +8,12 @@ describe('Roman numeral converter', () =>
     it('will return 4 given iv', () => {
     let actual = convert('iv');
     expect(actual).toEqual(4); });
+
+    it('will return 10 given x', () => {
+        let actual = convert('x');
+        expect(actual).toEqual(10); });
+
+    it('will return 34 given xxxiv', () => {
+        let actual = convert('xxxiv');
+        expect(actual).toEqual(34); });
 });
