@@ -1,16 +1,12 @@
 function convert(romanNumeral) {
     let total = 0;
     let previousValue = 0;
-    const romanNum = romanNumeral.split("");
-    for (let i = 0; i < romanNumeral.length; i++) {
-        let currentValue = toDecimal(romanNum[i]);
-        if (previousValue < currentValue) {
+    for (const numeral of romanNumeral.split("")) {
+        let currentValue = toDecimal(numeral);
+        total += (previousValue < currentValue) ?
             // subtracting the previous value twice because
             // it was added in the previous iteration of the loop
-            total += currentValue - (2 * previousValue);
-        } else {
-            total += currentValue;
-        }
+            currentValue - (2 * previousValue) : currentValue;
         previousValue = currentValue;
     }
     return total;
